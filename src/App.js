@@ -1,10 +1,10 @@
 import './App.css';
-import './store.js';
+import Card from './Card.js';
 
 function App() {
   return (
     <div>
-      
+      <Card />
     </div>
   );
 }
