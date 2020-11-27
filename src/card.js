@@ -1,5 +1,6 @@
 import React from 'react';
 import './store';
+import List from './list.js'
 
 class Card extends React.Component {
     render() {

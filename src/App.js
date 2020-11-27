@@ -3,9 +3,16 @@ import Card from './Card.js';
 
 function App() {
   return (
-    <div>
-      <Card />
-    </div>
+    <main>
+      <header>
+        <h1>
+          <Card />
+        </h1>
+      </header>
+      <div className="App-list">
+
+      </div>
+    </main>
   );
 }
 
