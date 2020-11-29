@@ -1,20 +1,14 @@
 import React from 'react';
-import './store';
-import List from './list.js'
+import './Card.css';
 
-class Card extends React.Component {
-    render() {
+export default function Card(props) {
         return (
             <div className="Card">
-                <h3>
-                    Hi there!
-                </h3>
-                <p>
-                    This is some text.
-                </p>
+               <button type="button">
+                Delete
+               </button>
+               <h3>{props.title}</h3>
+               <p>{props.content}</p>
             </div>
         )
-    }
 }
-
-export default Card;
