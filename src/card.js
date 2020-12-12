@@ -1,14 +1,19 @@
-import React from 'react';
-import './Card.css';
+import { render } from "@testing-library/react";
+import React from "react";
+import "./Card.css";
 
 export default function Card(props) {
-        return (
-            <div className="Card">
-               <button type="button">
-                Delete
-               </button>
-               <h3>{props.title}</h3>
-               <p>{props.content}</p>
-            </div>
-        )
+  return (
+    <div className="Card">
+      <button type="button" onClick={props.deleteCard}>
+        Delete
+      </button>
+      <h3>{props.title}</h3>
+      <p>{props.content}</p>
+    </div>
+  );
 }
+
+Card.propTypes = {
+  deleteCard: () => {},
+};
