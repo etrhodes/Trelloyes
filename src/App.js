@@ -14,12 +14,17 @@ const newRandomCard = () => {
   };
 };
 
+// function omit(obj, keyToOmit) {
+//   return Object.entries(obj).reduce(
+//     (newObj, [key, value]) =>
+//       key === keyToOmit ? newObj : { ...newObj, [key]: value },
+//     {}
+//   );
+// }
+
 function omit(obj, keyToOmit) {
-  return Object.entries(obj).reduce(
-    (newObj, [key, value]) =>
-      key === keyToOmit ? newObj : { ...newObj, [key]: value },
-    {}
-  );
+  let { [keyToOmit]: _, ...rest } = obj;
+  return rest;
 }
 
 class App extends Component {
@@ -28,13 +33,44 @@ class App extends Component {
     allCards: STORE.allCards,
   };
 
-  handleAddCard = () => {
+  handleAddCard = (listId) => {
     console.log("Added a card");
+    console.log(listId);
+    const { lists, allCards } = this.state;
+    const newCard = newRandomCard();
+    console.log(lists);
+    console.log(allCards);
+    let results = lists.map((list) => {
+      if (list.id === listId) {
+        list.cardIds.push(newCard.id);
+        return list;
+      } else {
+        return list;
+      }
+    });
+    allCards[newCard.id] = newCard;
+    console.log(results);
+    this.setState({ lists: results, allCards });
   };
 
-  handleDeleteCard = (cardId) => {
+  handleDeleteCard = (cardId, listId) => {
     console.log("This got deleted");
+    console.log(cardId, listId);
     const { lists, allCards } = this.state;
+    console.log(lists);
+    let results = lists.map((list) => {
+      if (list.id === listId) {
+        let cards = list.cardIds.filter((card) => card !== cardId);
+        list.cardIds = cards;
+        return list;
+      } else {
+        return list;
+      }
+    });
+    // let update = omit(allCards, cardId);
+    // console.log(update);
+    // this.setState({ allCards: update });
+    this.setState({ lists: results });
   };
 
   render() {
@@ -52,6 +88,7 @@ class App extends Component {
               cards={list.cardIds.map((id) => allCards[id])}
               addCard={this.handleAddCard}
               deleteCard={this.handleDeleteCard}
+              listId={list.id}
             />
           ))}
         </div>
